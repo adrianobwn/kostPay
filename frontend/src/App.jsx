@@ -8,7 +8,7 @@ import AuthForm from './components/AuthForm';
 // Data Kos Pak Le
 const kosData = {
   nama: "Kos Pak Le",
-  lokasi: "Jl. Prof. Sudarto, Tembalang, Semarang",
+  lokasi: "Jl. Teknik Industri Undip, Tembalang, Semarang",
   deskripsi: "Kos nyaman dan strategis untuk mahasiswa Teknik Industri Undip",
   kontak: {
     wa: "081234567890",
@@ -26,20 +26,20 @@ const kosData = {
   tipeKamar: [
     {
       id: 1,
-      nama: "Kamar AC",
-      harga: 1600000,
-      fasilitas: ["AC", "Kasur", "Lemari", "Meja Belajar", "Kamar Mandi Dalam"],
-      tersedia: 3,
-      total: 5,
+      nama: "Deluxe",
+      harga: 1200000,
+      fasilitas: ["AC", "Kasur Queen Size", "Lemari", "Meja Belajar", "Kamar Mandi Dalam"],
+      tersedia: 2,
+      total: 3,
       image: "/room-ac.png"
     },
     {
       id: 2,
-      nama: "Kamar Non-AC",
-      harga: 1200000,
-      fasilitas: ["Kipas Angin", "Kasur", "Lemari", "Meja Belajar", "Kamar Mandi Dalam"],
-      tersedia: 2,
-      total: 5,
+      nama: "Standard",
+      harga: 800000,
+      fasilitas: ["Kipas Angin", "Kasur", "Lemari", "Meja Belajar"],
+      tersedia: 5,
+      total: 7,
       image: "/room-non-ac.png"
     }
   ]
@@ -121,7 +121,7 @@ const LandingPage = () => {
                     <Shield className="text-blue-600" size={24} />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-gray-900">10</div>
+                    <div className="text-2xl font-bold text-gray-900">6</div>
                     <div className="text-sm text-gray-500">Kamar Tersedia</div>
                   </div>
                 </div>
@@ -206,9 +206,9 @@ const LandingPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
             <div className="p-8 md:p-12">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">Lokasi Strategis</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">Lokasi di Teknik Industri</h3>
               <p className="text-gray-600 mb-6">
-                Berada di area kampus Teknik Industri Undip, sangat dekat dengan fakultas dan fasilitas kampus.
+                Lokasi tepat di depan Fakultas Teknik Industri Undip, hanya 1 menit jalan kaki ke ruang kuliah.
               </p>
               <div className="flex items-start gap-3 mb-6">
                 <MapPin className="text-blue-600 mt-1" size={24} />
@@ -217,8 +217,18 @@ const LandingPage = () => {
                   <p className="text-gray-600 text-sm">Tembalang, Semarang, Jawa Tengah</p>
                 </div>
               </div>
-              <div className="bg-gray-100 rounded-2xl h-64 flex items-center justify-center">
-                <p className="text-gray-500">[ Peta Google Maps akan ditampilkan di sini ]</p>
+              <div className="bg-gray-100 rounded-2xl overflow-hidden h-64 md:h-96">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.8759365077383!2d110.44031107448422!3d-7.054726392944844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7044b5c5e8e7e7%3A0x5e8e7e7e7e7e7e7e!2sFakultas%20Teknik%20Universitas%20Diponegoro!5e0!3m2!1sid!2sid!4v1703123456789!5m2!1sid!2sid"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Lokasi Kos Pak Le - Teknik Industri Undip"
+                  className="w-full h-full"
+                />
               </div>
             </div>
           </div>
