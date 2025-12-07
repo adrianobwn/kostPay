@@ -114,14 +114,30 @@ exports.getKamarById = async (req, res) => {
 // Admin: Create kamar
 exports.createKamar = async (req, res) => {
     try {
-        const { kodeKamar, tipeKamar, harga, statusKamar } = req.body;
+        // Menerima data dari frontend dengan nama field yang sesuai
+        const { nomor_kamar, tipe_id, lantai, status } = req.body;
+
+        // Validasi input
+        if (!nomor_kamar || !tipe_id) {
+            return res.status(400).json({ error: 'Nomor kamar dan tipe kamar harus diisi' });
+        }
+
+        // Cek tipe kamar untuk mendapatkan harga
+        const tipeKamar = await prisma.tipe_Kamar.findUnique({
+            where: { id: parseInt(tipe_id) }
+        });
+
+        if (!tipeKamar) {
+            return res.status(400).json({ error: 'Tipe kamar tidak ditemukan' });
+        }
 
         const kamar = await prisma.kamar.create({
             data: {
-                kodeKamar,
-                tipeKamar: parseInt(tipeKamar),
-                harga: parseInt(harga),
-                statusKamar
+                kodeKamar: nomor_kamar,
+                tipeKamar: parseInt(tipe_id),
+                harga: tipeKamar.harga, // Mengambil harga dari tipe kamar
+                statusKamar: status || 'TERSEDIA',
+                lantai: lantai ? parseInt(lantai) : 1 // Default lantai 1 jika tidak diisi
             },
             include: {
                 tipe: true
@@ -148,16 +164,31 @@ exports.createKamar = async (req, res) => {
 exports.updateKamar = async (req, res) => {
     try {
         const { id } = req.params;
-        const { kodeKamar, tipeKamar, harga, statusKamar } = req.body;
+        const { nomor_kamar, tipe_id, lantai, status } = req.body;
+
+        // Data untuk update
+        const updateData = {};
+
+        if (nomor_kamar) updateData.kodeKamar = nomor_kamar;
+        if (tipe_id) {
+            // Jika tipe kamar diubah, dapatkan harga baru
+            const tipeKamar = await prisma.tipe_Kamar.findUnique({
+                where: { id: parseInt(tipe_id) }
+            });
+
+            if (!tipeKamar) {
+                return res.status(400).json({ error: 'Tipe kamar tidak ditemukan' });
+            }
+
+            updateData.tipeKamar = parseInt(tipe_id);
+            updateData.harga = tipeKamar.harga;
+        }
+        if (lantai) updateData.lantai = parseInt(lantai);
+        if (status) updateData.statusKamar = status;
 
         const kamar = await prisma.kamar.update({
             where: { id: parseInt(id) },
-            data: {
-                ...(kodeKamar && { kodeKamar }),
-                ...(tipeKamar && { tipeKamar: parseInt(tipeKamar) }),
-                ...(harga && { harga: parseInt(harga) }),
-                ...(statusKamar && { statusKamar })
-            },
+            data: updateData,
             include: {
                 tipe: true
             }

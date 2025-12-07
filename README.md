@@ -40,10 +40,16 @@ npm install
 
 **Initialize Database:**
 
-```bash
-npx prisma migrate dev
-npx prisma generate
-```
+1. Import database schema:
+   ```bash
+   # Lihat file backend/SETUP_DATABASE.md untuk instruksi lengkap
+   mysql -h 127.0.0.1 -P 3308 -u root -p kostpakle_db < backend/kostpakle_db.sql
+   ```
+
+2. Generate Prisma Client:
+   ```bash
+   npx prisma generate
+   ```
 
 **Start Backend Server:**
 
@@ -106,6 +112,8 @@ kostPay/
 │   ├── controllers/      # API route handlers
 │   ├── middleware/       # Express middleware
 │   ├── prisma/          # Database schema & migrations
+│   ├── kostpakle_db.sql  # Database SQL file
+│   ├── SETUP_DATABASE.md # Database setup instructions
 │   ├── .env.example     # Environment template
 │   └── server.js        # Express server entry point
 │

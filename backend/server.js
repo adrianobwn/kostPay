@@ -67,6 +67,7 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Kos Pak Le API is running' });
 });
 
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint tidak ditemukan' });

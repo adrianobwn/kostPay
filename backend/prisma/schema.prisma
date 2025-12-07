@@ -85,7 +85,7 @@ model Booking {
 model Payments {
   id           Int      @id @default(autoincrement())
   idBooking    Int
-  paymentProof String?  @db.Text
+  paymentProof String?   @db.Text
   status       String   // PENDING, VERIFIED, REJECTED
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -102,6 +102,7 @@ model Kamar {
   tipeKamar   Int
   harga       Int
   statusKamar String   // TERSEDIA, TERISI, MAINTENANCE
+  lantai      Int      // Nomor lantai
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -118,6 +119,7 @@ model Tipe_Kamar {
   nama        String
   fasilitas   String   @db.Text // JSON string array
   statusKamar String   // ACTIVE, INACTIVE
+  harga       Int      // Harga sewa per bulan
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
